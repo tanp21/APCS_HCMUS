@@ -24,10 +24,8 @@ void rotateNode(Node* &root, bool ccw) {
 }
 
 void insertAVL(Node* &root, int x) {
-    if (!root) return void(root = new Node{x, 1, NULL, NULL});
-
-    if (root->data == x) return;
-    else insertAVL(x < root->data ? root->left : root->right, x);
+    if (!root || root->data == x) return void(root ? : root = new Node{x, 1, NULL, NULL});
+    insertAVL(x < root->data ? root->left : root->right, x);
 
     updHeight(root); int bal = getBalance(root);
     if(bal >= -1 && bal <= 1) return;
